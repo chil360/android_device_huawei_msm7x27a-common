@@ -1,0 +1,25 @@
+From 4eca5acbfb818cfee9ee73e1fd6399fbd454de91 Mon Sep 17 00:00:00 2001
+From: Kyle Harrison <khwebmail@gmail.com>
+Date: Mon, 17 Mar 2014 20:38:17 +0000
+Subject: [PATCH] Advanced reboot enabled by default (2/2)
+
+---
+ src/com/android/settings/SecuritySettings.java | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/com/android/settings/SecuritySettings.java b/src/com/android/settings/SecuritySettings.java
+index 72baf1e..e3d1c5a 100644
+--- a/src/com/android/settings/SecuritySettings.java
++++ b/src/com/android/settings/SecuritySettings.java
+@@ -424,7 +424,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
+ 
+         mAdvancedReboot = (ListPreference) root.findPreference(KEY_ADVANCED_REBOOT);
+         mAdvancedReboot.setValue(String.valueOf(Settings.Secure.getInt(
+-                getContentResolver(), Settings.Secure.ADVANCED_REBOOT, 0)));
++                getContentResolver(), Settings.Secure.ADVANCED_REBOOT, 2)));
+         mAdvancedReboot.setSummary(mAdvancedReboot.getEntry());
+         mAdvancedReboot.setOnPreferenceChangeListener(this);
+ 
+-- 
+2.1.0
+

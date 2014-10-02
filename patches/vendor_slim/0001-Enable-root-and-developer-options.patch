@@ -1,0 +1,46 @@
+From b77626d5171ed83ea7d5a0bbce783aa52bc991c9 Mon Sep 17 00:00:00 2001
+From: Kyle Harrison <khwebmail@gmail.com>
+Date: Thu, 21 Aug 2014 11:55:54 +0100
+Subject: [PATCH] Enable root and developer options
+
+---
+ config/common.mk | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/config/common.mk b/config/common.mk
+index c2fdb01..f792194 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -18,7 +18,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
+     ro.com.android.dataroaming=false
+ 
+ PRODUCT_PROPERTY_OVERRIDES += \
+-    ro.build.selinux=1
++    ro.build.selinux=1 \
++    persist.sys.root_access=3
+ 
+ # Disable excessive dalvik debug messages
+ PRODUCT_PROPERTY_OVERRIDES += \
+@@ -164,7 +165,7 @@ ifdef SLIM_BUILD_EXTRA
+ endif
+ ifndef SLIM_BUILD_TYPE
+     SLIM_BUILD_TYPE := CHIL360
+-    PLATFORM_VERSION_CODENAME := CHIL360
++    PLATFORM_VERSION_CODENAME := UNOFFICIAL
+     SLIM_POSTFIX := #-$(shell date +"%Y%m%d-%H%M")
+ endif
+ 
+@@ -179,8 +180,8 @@ ifneq ($(INCLUDE_SLIMIRC),)
+ endif
+ 
+ # Set all versions
+-SLIM_VERSION := Slim-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
+-SLIM_MOD_VERSION := Slim-$(SLIM_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
++SLIM_VERSION := SlimDEV-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
++SLIM_MOD_VERSION := SlimDEV-$(SLIM_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
+ 
+ PRODUCT_PROPERTY_OVERRIDES += \
+     BUILD_DISPLAY_ID=$(BUILD_ID) \
+-- 
+2.1.0
+
