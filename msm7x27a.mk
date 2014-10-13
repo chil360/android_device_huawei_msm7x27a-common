@@ -64,6 +64,10 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs
 
+# WebKit
+PRODUCT_PACKAGES += \
+    libwebcore
+
 # Files
 PRODUCT_COPY_FILES += \
     device/huawei/msm7x27a-common/rootdir/init.huawei.rc:root/init.huawei.rc \
@@ -156,5 +160,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.force_highendgfx=true
+
+# Webkit (classic webview provider)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.webview.provider=classic
+
+# Stagefright
+PRODUCT_PROPERTY_OVERRIDES += \
+   media.stagefright.enable-player=true \
+   media.stagefright.enable-meta=false \
+   media.stagefright.enable-scan=true \
+   media.stagefright.enable-http=true \
+   media.stagefright.enable-fma2dp=true \
+   media.stagefright.enable-aac=true \
+   media.stagefright.enable-qcp=true
 
 $(call inherit-product, vendor/huawei/msm7x27a-common/msm7x27a-common-vendor.mk)
