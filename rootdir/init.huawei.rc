@@ -46,6 +46,13 @@ on init
     symlink /storage/sdcard0 /mnt/internal_sd
     symlink /storage/sdcard0 /internal_sd
 
+service nfc_check /system/bin/nfc_check
+    class main
+    oneshot
+    socket nfc_check stream 0755 nfc nfc
+    user nfc
+    group system
+
 on boot
     mount debugfs debugfs /sys/kernel/debug
 
@@ -142,8 +149,33 @@ on boot
     write /sys/module/pm2/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm2/modes/cpu0/power_collapse/idle_enabled 1
 
+    mkdir /data/nfc 0755 nfc nfc
+    mkdir /dev/pn544
+    mkdir /sys/class/NFC_sensor
+    mkdir /sys/class/NFC_sensor/comn
+    mkdir /sys/class/NFC_sensor/comn/nxp_uicc_swp
+    chown nfc nfc /sys/class/NFC_sensor/nxp_uicc_swp
+    chown nfc nfc /sys/class/NFC_sensor/comn
+    chown nfc nfc /sys/class/NFC_sensor/comn
+    chown nfc nfc /dev/pn544
+    chown nfc nfc /sys/class/NFC_sensor/comn/nxp_uicc_swp
+    chmod 0755 /sys/class/NFC_sensor/comn/nxp_uicc_swp
+	      setprop debug.nfc.fw_download "true"
+	      setprop debug.nfc.fw_boot_download "false"
+    setprop ro.nfc.port "I2C"
+    
+    # NFC local data and nfcee xml storage
+    mkdir /data/nfc 0755 nfc nfc
+    mkdir /data/nfc/param 755 nfc nfc
+    
+    # NFC local data and misc
+    mkdir /data/misc/nfc 0755 nfc nfc
+    mkdir /data/misc/nfc/param 0755 nfc nfc
+    user nfc
+    group system
+
     # Run sysinit
-   start sysinit
+    start sysinit
 
 on emmc-fs
     # mount mmc partitions
@@ -187,7 +219,7 @@ on post-fs-data
     chmod 0660 /sys/class/android_usb/android0/f_rndis/ethaddr
 
     write /sys/class/leds/button-backlight/max_brightness 80    
-    
+
     setprop vold.post_fs_data_done 1
 
 on property:init.svc.wpa_supplicant=stopped
