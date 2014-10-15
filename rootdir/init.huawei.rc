@@ -52,6 +52,13 @@ service nfc_check /system/bin/nfc_check
     socket nfc_check stream 0755 nfc nfc
     user nfc
     group system
+    
+service libpn544_fw.so /system/lib/libpn544_fw.so
+    class main
+    oneshot
+    socket libpn544_fw.so stream 0755 nfc nfc
+    user nfc
+    group system    
 
 on boot
     mount debugfs debugfs /sys/kernel/debug
@@ -150,20 +157,10 @@ on boot
     write /sys/module/pm2/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm2/modes/cpu0/power_collapse/idle_enabled 1
 
-    mkdir /data/nfc 0755 nfc nfc
-    mkdir /dev/pn544
-    mkdir /sys/class/NFC_sensor
-    mkdir /sys/class/NFC_sensor/comn
-    mkdir /sys/class/NFC_sensor/comn/nxp_uicc_swp
-    chown nfc nfc /sys/class/NFC_sensor/nxp_uicc_swp
-    chown nfc nfc /sys/class/NFC_sensor/comn
-    chown nfc nfc /sys/class/NFC_sensor/comn
-    chown nfc nfc /dev/pn544
-    chown nfc nfc /sys/class/NFC_sensor/comn/nxp_uicc_swp
-    chmod 0755 /sys/class/NFC_sensor/comn/nxp_uicc_swp
-	      setprop debug.nfc.fw_download "true"
-	      setprop debug.nfc.fw_boot_download "false"
+    # NFC
     setprop ro.nfc.port "I2C"
+    chmod 0600 /dev/pn544
+    chown nfc nfc /dev/pn544
     
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0755 nfc nfc
@@ -188,6 +185,7 @@ on post-fs-data
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
     chmod 0666 /sys/class/rfkill/rfkill0/state
+    symlink /dev/pn544
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
