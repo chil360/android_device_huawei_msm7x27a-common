@@ -48,17 +48,9 @@ on init
 
 service nfc_check /system/bin/nfc_check
     class main
-    oneshot
-    socket nfc_check stream 0755 nfc nfc
-    user nfc
-    group system
-    
-service libpn544_fw.so /system/lib/libpn544_fw.so
-    class main
-    oneshot
-    socket libpn544_fw.so stream 0755 nfc nfc
-    user nfc
-    group system    
+    user root
+    group root
+    oneshot  
 
 on boot
     mount debugfs debugfs /sys/kernel/debug
