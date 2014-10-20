@@ -1,0 +1,16 @@
+From: ChepKun <ProgrammerKun@gmail.com>
+Subject: Force translucent status bar without high end gfx
+
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/BarTransitions.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BarTransitions.java
+index 20177da..428af24 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/BarTransitions.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BarTransitions.java
+@@ -37,7 +37,7 @@ public class BarTransitions {
+     private static final boolean DEBUG = false;
+     private static final boolean DEBUG_COLORS = false;
+ 
+-    public static final boolean HIGH_END = ActivityManager.isHighEndGfx();
++    public static final boolean HIGH_END = true;
+ 
+     public static final int MODE_OPAQUE = 0;
+     public static final int MODE_SEMI_TRANSPARENT = 1;

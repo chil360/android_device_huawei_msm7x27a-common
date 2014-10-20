@@ -158,9 +158,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=60
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.force_highendgfx=true
-
 # Webkit (classic webview provider)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.webview.provider=classic
