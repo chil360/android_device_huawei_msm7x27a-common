@@ -1,17 +1,18 @@
-From 4c2667de54e64b8143aec74740cc55f84ebe818e Mon Sep 17 00:00:00 2001
+From 46a9efa51d7e2df68fd352952ff952e4ec063631 Mon Sep 17 00:00:00 2001
 From: Kyle Harrison <khwebmail@gmail.com>
-Date: Thu, 17 Jul 2014 19:20:44 +0100
-Subject: [PATCH] don't disable lockscreen widgets on low memory devices
+Date: Tue, 21 Oct 2014 01:01:53 +0100
+Subject: [PATCH] Don't disable lockscreen widgets on low memory devices
 
+Change-Id: If47f551edbf4515db97c5be27df53d23607cffe3
 ---
- src/com/android/settings/SecuritySettings.java | 3 +--
+ src/com/android/settings/Lockscreen.java | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/src/com/android/settings/SecuritySettings.java b/src/com/android/settings/SecuritySettings.java
-index 7401c9b..988633d 100644
---- a/src/com/android/settings/SecuritySettings.java
-+++ b/src/com/android/settings/SecuritySettings.java
-@@ -381,8 +381,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
+diff --git a/src/com/android/settings/Lockscreen.java b/src/com/android/settings/Lockscreen.java
+index 8331b52..109d342 100644
+--- a/src/com/android/settings/Lockscreen.java
++++ b/src/com/android/settings/Lockscreen.java
+@@ -298,8 +298,7 @@ public class Lockscreen extends RestrictedSettingsFragment
          // and remove them on low memory devices
          mEnableKeyguardWidgets = root.findPreference(KEY_ENABLE_WIDGETS);
          if (mEnableKeyguardWidgets != null) {
@@ -19,8 +20,8 @@ index 7401c9b..988633d 100644
 -                    || mLockPatternUtils.isLockScreenDisabled()) {
 +            if (mLockPatternUtils.isLockScreenDisabled()) {
                  // Widgets take a lot of RAM, so disable them on low-memory devices
-                 if (mSecurityCategory != null) {
-                     mSecurityCategory.removePreference(root.findPreference(KEY_ENABLE_WIDGETS));
+                 root.removePreference(root.findPreference(KEY_ENABLE_WIDGETS));
+                 mEnableKeyguardWidgets = null;
 -- 
-2.0.1
+2.1.2
 
