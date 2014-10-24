@@ -64,10 +64,6 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs
 
-# WebKit
-PRODUCT_PACKAGES += \
-    libwebcore
-
 # Files
 PRODUCT_COPY_FILES += \
     device/huawei/msm7x27a-common/rootdir/init.huawei.rc:root/init.huawei.rc \
@@ -157,10 +153,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=60
-
-# Webkit (classic webview provider)
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.webview.provider=classic
 
 # Stagefright
 PRODUCT_PROPERTY_OVERRIDES += \
