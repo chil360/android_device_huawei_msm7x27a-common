@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 ifneq ($(USE_CAMERA_STUB),true)
 ifneq ($(BUILD_TINY_ANDROID),true)
-ifeq ($(USE_DEVICE_SPECIFIC_CAMERA),true)
+ifneq ($(USE_DEVICE_SPECIFIC_CAMERA),true)
 
 include $(CLEAR_VARS)
 
