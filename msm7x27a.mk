@@ -57,8 +57,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.msm7x27a \
     camera.msm7x27a
-#    lights.msm7x27a
 
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes    
+    
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     hwmac \
