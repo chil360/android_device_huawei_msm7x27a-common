@@ -1,7 +1,7 @@
-From 1ba693ba07e225f33c28d1502fa69eaba4237c60 Mon Sep 17 00:00:00 2001
+From fdd6e1144941717840a42c1f6af2036ca567e30c Mon Sep 17 00:00:00 2001
 From: Kyle Harrison <khwebmail@gmail.com>
 Date: Thu, 16 Jan 2014 12:21:59 +0000
-Subject: [PATCH] Add setting for Vold Switchable Pair (2/2)
+Subject: [PATCH 1/2] Add setting for Vold Switchable Pair (2/2)
 
 ---
  res/values/slim_strings.xml                     |  7 ++++
@@ -10,10 +10,10 @@ Subject: [PATCH] Add setting for Vold Switchable Pair (2/2)
  3 files changed, 65 insertions(+), 1 deletion(-)
 
 diff --git a/res/values/slim_strings.xml b/res/values/slim_strings.xml
-index 78af6f3..81ab8d7 100644
+index 1a6dd52..9c7d770 100644
 --- a/res/values/slim_strings.xml
 +++ b/res/values/slim_strings.xml
-@@ -916,6 +916,13 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -1090,6 +1090,13 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <!-- Minimum Vibration Duration -->
      <string name="minimum_vibration_duration">Minimum vibration duration</string>
  
@@ -28,7 +28,7 @@ index 78af6f3..81ab8d7 100644
      <string name="interface_settings_animation_title">Animation options</string>
      <string name="listview_animation_title">ListView animation</string>
 diff --git a/res/xml/device_info_memory.xml b/res/xml/device_info_memory.xml
-index e905f39..2010b2c 100644
+index 47be229..688efae 100644
 --- a/res/xml/device_info_memory.xml
 +++ b/res/xml/device_info_memory.xml
 @@ -16,6 +16,11 @@
@@ -44,10 +44,10 @@ index e905f39..2010b2c 100644
  <!-- Preference categories are dynamically created based on the list of available storage volumes -->
  
 diff --git a/src/com/android/settings/deviceinfo/Memory.java b/src/com/android/settings/deviceinfo/Memory.java
-index 999611d..92d9863 100644
+index a604eea..4bb00f1 100644
 --- a/src/com/android/settings/deviceinfo/Memory.java
 +++ b/src/com/android/settings/deviceinfo/Memory.java
-@@ -32,16 +32,20 @@ import android.hardware.usb.UsbManager;
+@@ -32,19 +32,23 @@ import android.hardware.usb.UsbManager;
  import android.os.Bundle;
  import android.os.Environment;
  import android.os.IBinder;
@@ -61,14 +61,17 @@ index 999611d..92d9863 100644
  import android.os.storage.StorageManager;
  import android.os.storage.StorageVolume;
 +import android.preference.CheckBoxPreference;
+ import android.preference.ListPreference;
  import android.preference.Preference;
  import android.preference.PreferenceActivity;
  import android.preference.PreferenceScreen;
+ import android.preference.Preference.OnPreferenceChangeListener;
+ import android.provider.Settings;
 +import android.text.TextUtils;
  import android.util.Log;
  import android.view.Menu;
  import android.view.MenuInflater;
-@@ -80,6 +84,10 @@ public class Memory extends SettingsPreferenceFragment {
+@@ -87,6 +91,10 @@ public class Memory extends SettingsPreferenceFragment
      private UsbManager mUsbManager;
  
      private ArrayList<StorageVolumePreferenceCategory> mCategories = Lists.newArrayList();
@@ -79,7 +82,7 @@ index 999611d..92d9863 100644
  
      @Override
      public void onCreate(Bundle icicle) {
-@@ -94,6 +102,27 @@ public class Memory extends SettingsPreferenceFragment {
+@@ -101,6 +109,27 @@ public class Memory extends SettingsPreferenceFragment
  
          addPreferencesFromResource(R.xml.device_info_memory);
  
@@ -107,7 +110,7 @@ index 999611d..92d9863 100644
          addCategory(StorageVolumePreferenceCategory.buildForInternal(context));
  
          final StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
-@@ -214,7 +243,13 @@ public class Memory extends SettingsPreferenceFragment {
+@@ -228,7 +257,13 @@ public class Memory extends SettingsPreferenceFragment
  
      @Override
      public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -122,7 +125,7 @@ index 999611d..92d9863 100644
              ConfirmClearCacheFragment.show(this);
              return true;
          }
-@@ -424,4 +459,21 @@ public class Memory extends SettingsPreferenceFragment {
+@@ -453,4 +488,21 @@ public class Memory extends SettingsPreferenceFragment
              return builder.create();
          }
      }
@@ -145,5 +148,5 @@ index 999611d..92d9863 100644
 +    }
  }
 -- 
-1.8.5.2
+2.1.3
 
